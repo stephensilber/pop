@@ -416,6 +416,11 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
 
+  // notify observers
+  for (id observer in self.observers) {
+    [observer animatorWillAnimate:(id)self];
+  }
+    
   // notify delegate
   __strong __typeof__(_delegate) delegate = _delegate;
   [delegate animatorWillAnimate:self];

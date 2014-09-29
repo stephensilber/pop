@@ -11,16 +11,6 @@
 
 @class POPAnimation;
 
-@protocol POPAnimatorObserving <NSObject>
-@required
-
-/**
- @abstract Called on each observer after animator has advanced. Core Animation actions are disabled by default.
- */
-- (void)animatorDidAnimate:(POPAnimator *)animator;
-
-@end
-
 @interface POPAnimator ()
 
 #if !TARGET_OS_IPHONE
@@ -54,15 +44,5 @@
 - (void)removeAnimationForObject:(id)obj key:(NSString *)key;
 - (NSArray *)animationKeysForObject:(id)obj;
 - (POPAnimation *)animationForObject:(id)obj key:(NSString *)key;
-
-/**
- @abstract Add an animator observer. Observer will be notified of each subsequent animator advance until removal.
- */
-- (void)addObserver:(id<POPAnimatorObserving>)observer;
-
-/**
- @abstract Remove an animator observer.
- */
-- (void)removeObserver:(id<POPAnimatorObserving>)observer;
 
 @end

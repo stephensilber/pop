@@ -11,6 +11,22 @@
 
 @protocol POPAnimatorDelegate;
 
+@class POPAnimator;
+
+@protocol POPAnimatorObserving <NSObject>
+@required
+
+/**
+ @abstract Called on each observer after animator has advanced. Core Animation actions are disabled by default.
+ */
+- (void)animatorDidAnimate:(POPAnimator *)animator;
+
+/**
+ @abstract Called on each observer before animator has advanced. Core Animation actions are disabled by default.
+ */
+- (void)animatorWillAnimate:(POPAnimator *)animator;
+
+@end
 /**
  @abstract The animator class renders animations.
  */
@@ -26,6 +42,16 @@
  @abstract The optional animator delegate.
  */
 @property (weak, nonatomic) id<POPAnimatorDelegate> delegate;
+
+/**
+ @abstract Add an animator observer. Observer will be notified of each subsequent animator advance until removal.
+ */
+- (void)addObserver:(id<POPAnimatorObserving>)observer;
+
+/**
+ @abstract Remove an animator observer.
+ */
+- (void)removeObserver:(id<POPAnimatorObserving>)observer;
 
 @end
 
